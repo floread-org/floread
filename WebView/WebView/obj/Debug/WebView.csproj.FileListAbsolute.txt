@@ -1,9 +1,0 @@
-c:\users\yoshiki\documents\visual studio 2015\Projects\WebView\WebView\bin\Debug\WebView.exe.config
-c:\users\yoshiki\documents\visual studio 2015\Projects\WebView\WebView\bin\Debug\WebView.exe
-c:\users\yoshiki\documents\visual studio 2015\Projects\WebView\WebView\bin\Debug\WebView.pdb
-c:\users\yoshiki\documents\visual studio 2015\Projects\WebView\WebView\obj\Debug\WebView.csprojResolveAssemblyReference.cache
-c:\users\yoshiki\documents\visual studio 2015\Projects\WebView\WebView\obj\Debug\WebView.Form1.resources
-c:\users\yoshiki\documents\visual studio 2015\Projects\WebView\WebView\obj\Debug\WebView.Properties.Resources.resources
-c:\users\yoshiki\documents\visual studio 2015\Projects\WebView\WebView\obj\Debug\WebView.csproj.GenerateResource.Cache
-c:\users\yoshiki\documents\visual studio 2015\Projects\WebView\WebView\obj\Debug\WebView.exe
-c:\users\yoshiki\documents\visual studio 2015\Projects\WebView\WebView\obj\Debug\WebView.pdb
