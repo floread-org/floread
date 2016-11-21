@@ -1,0 +1,53 @@
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:200,300,400" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="http://cdn.jsdelivr.net/lining.js/0.3.2/lining.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
+  <link href="./css/entry.css" rel="stylesheet">
+
+  <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+  <title>FLOREAD DEMO</title>
+</head>
+<body>
+  <center>
+    <div id = "flex-container">
+      <div id = "container">
+        <div id = "intro" class = "contentcontainer">
+          <h1>Floread</h1>
+          <input type = "text" class = "form-control" id="urlinput" name = "name" placeholder="Enter URL of article" style = "margin-left: 100px;width: 600px"></input>
+          <button class = "btn btn-lg btn-secondary" id="startbtn">Start Floread</button>
+        </div>
+        <div id = "content" class = "contentcontainer" style="display: none">
+        </div>
+      </div>
+
+    </div>
+  </center>
+  <script type = "text/javascript">
+    $('#startbtn').click(function(){
+      $('#intro').fadeOut(500, function(){
+        $.ajax({
+          type: "GET",
+          contentType: "application/json",
+          url: 'https://mercury.postlight.com/parser?url=' + $('#urlinput').val(),
+          headers: {'x-api-key': 'gGcTfQmN8iBijl9V7UQuolHpJbxeaFMHeDjIGJuJ'},
+          complete: function( data ) {
+            document.getElementById('content').innerHTML = '<h1>' + data.responseJSON.title + '</h1>' + data.responseJSON.content;
+            console.log(data);
+            $('#content').fadeIn(500, function(){
+              var poemLining = lining(document.getElementById('content'), {
+                'autoResize': true
+              });
+            });
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
