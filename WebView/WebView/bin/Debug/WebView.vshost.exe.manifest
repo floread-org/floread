@@ -49,17 +49,17 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>cQz8m4rOy91doXRhj4rNrREDoDXUUlaUqNboKVFL5Tg=</dsig:DigestValue>
+        <dsig:DigestValue>uGolpveID4JR9JlXU/YT/u0DMJclRWAvF725Xcf2bto=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="WebView.exe.config" size="184">
+  <file name="WebView.exe.config" size="189">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>jWVCngsqgsEdPtxOoE7SAK7f6h1++LmE6IqOl8/1R3A=</dsig:DigestValue>
+      <dsig:DigestValue>6N7MliNbVJSIAIPrecIshMbZ7zEoKLr5SQvud4LDUOw=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
