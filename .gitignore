@@ -252,4 +252,5 @@ paket-files/
 *.sln.iml
 
 *.exe.manifest
-.suo
+*.suo
+*.cache
