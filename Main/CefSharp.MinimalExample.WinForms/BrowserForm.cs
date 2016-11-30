@@ -20,7 +20,7 @@ namespace CefSharp.MinimalExample.WinForms
             Text = "CefSharp";
             WindowState = FormWindowState.Maximized;
 
-            browser = new ChromiumWebBrowser("jeremyleu.com/floread/sample.html")
+            browser = new ChromiumWebBrowser("file:///C:/Users/Abhii/Source/Repos/floread/floreadWeb/index.html")
             {
                 Dock = DockStyle.Fill,
             };
