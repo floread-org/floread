@@ -7,17 +7,28 @@ using System.Windows.Forms;
 using CefSharp.MinimalExample.WinForms.Controls;
 using CefSharp.WinForms;
 
+using System.IO.Ports;
+
 namespace CefSharp.MinimalExample.WinForms
 {
     public partial class BrowserForm : Form
     {
         private readonly ChromiumWebBrowser browser;
+        // serial port source modified from:
+        // http://forum.arduino.cc/index.php?topic=40336.0
+        SerialPort port = new SerialPort();
 
         public BrowserForm()
         {
             InitializeComponent();
 
-            Text = "CefSharp";
+            port.PortName = "COM3";
+            port.BaudRate = 9600;
+            port.DtrEnable = true;
+            port.Open();
+            port.DataReceived += port_DataReceived;
+
+            Text = "FloRead";
             WindowState = FormWindowState.Maximized;
 
             browser = new ChromiumWebBrowser("file:///C:/Users/Abhii/Source/Repos/floread/floreadWeb/index.html")
@@ -35,6 +46,20 @@ namespace CefSharp.MinimalExample.WinForms
             var bitness = Environment.Is64BitProcess ? "x64" : "x86";
             var version = String.Format("Chromium: {0}, CEF: {1}, CefSharp: {2}, Environment: {3}", Cef.ChromiumVersion, Cef.CefVersion, Cef.CefSharpVersion, bitness);
             DisplayOutput(version);
+        }
+
+        private void port_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            string line = port.ReadLine();
+            BeginInvoke(new LineReceivedEvent(LineReceived), line);
+        }
+
+        private delegate void LineReceivedEvent(string line);
+        private void LineReceived(string line)
+        {
+            // TODO: modify the CSS of the web-app
+            int photoValue = int.Parse(line);
+            Console.WriteLine(photoValue);
         }
 
         private void OnBrowserConsoleMessage(object sender, ConsoleMessageEventArgs args)
