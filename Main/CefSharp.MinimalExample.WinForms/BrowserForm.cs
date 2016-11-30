@@ -6,6 +6,7 @@ using System;
 using System.Windows.Forms;
 using CefSharp.MinimalExample.WinForms.Controls;
 using CefSharp.WinForms;
+using EyeXFramework;
 
 using System.IO.Ports;
 
@@ -18,10 +19,11 @@ namespace CefSharp.MinimalExample.WinForms
         // http://forum.arduino.cc/index.php?topic=40336.0
         SerialPort port = new SerialPort();
 
+        
         public BrowserForm()
         {
             InitializeComponent();
-
+            Program.EyeXHost.Connect(behaviorMap1);
             port.PortName = "COM3";
             port.BaudRate = 9600;
             port.DtrEnable = true;
