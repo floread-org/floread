@@ -60,6 +60,37 @@ namespace CefSharp.MinimalExample.WinForms
             // TODO: modify the CSS of the web-app
             int photoValue = int.Parse(line);
             Console.WriteLine(photoValue);
+
+            string color = "black", background = "white";
+
+            if (photoValue < 150)
+            {
+                color = "yellow";
+                background = "purple";
+            }
+            else if (photoValue < 325)
+            {
+                color = "green";
+                background = "orange";
+            }
+            else if (photoValue < 440)
+            {
+                color = "blue";
+                background = "black";
+            }
+            else if (photoValue < 570)
+            {
+                color = "brown";
+                background = "gray";
+            }
+            else
+            {
+                color = "black";
+                background = "white";
+            }
+            // https://github.com/cefsharp/CefSharp/wiki/Frequently-asked-questions#CallJS
+            // var script = string.Format("setColors({0});'", photoValue);
+            browser.GetMainFrame().ExecuteJavaScriptAsync(string.Format("document.body.style.background = '{0}'; document.body.style.color = '{1}';", background, color));
         }
 
         private void OnBrowserConsoleMessage(object sender, ConsoleMessageEventArgs args)
