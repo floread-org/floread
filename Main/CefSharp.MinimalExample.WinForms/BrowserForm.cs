@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using CefSharp.MinimalExample.WinForms.Controls;
 using CefSharp.WinForms;
 using EyeXFramework;
+using EyeXFramework.Forms;
 
 using System.IO.Ports;
 
@@ -17,13 +18,15 @@ namespace CefSharp.MinimalExample.WinForms
         private readonly ChromiumWebBrowser browser;
         // serial port source modified from:
         // http://forum.arduino.cc/index.php?topic=40336.0
-        SerialPort port = new SerialPort();
+        SerialPort port;
 
         
         public BrowserForm()
         {
             InitializeComponent();
-            Program.EyeXHost.Connect(behaviorMap1);
+            port = new SerialPort();
+            Program p = new Program();
+            p.EyeXHost.Connect(behaviorMap1);
             port.PortName = "COM3";
             port.BaudRate = 9600;
             port.DtrEnable = true;
@@ -32,7 +35,7 @@ namespace CefSharp.MinimalExample.WinForms
 
             Text = "FloRead";
             WindowState = FormWindowState.Maximized;
-
+            // http://www.nytimes.com/2011/03/27/business/27novel.html
             browser = new ChromiumWebBrowser("file:///C:/Users/Abhii/Source/Repos/floread/floreadWeb/index.html")
             {
                 Dock = DockStyle.Fill,

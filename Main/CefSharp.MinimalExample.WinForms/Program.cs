@@ -10,12 +10,12 @@ namespace CefSharp.MinimalExample.WinForms
 {
     public class Program
     {
-        private static FormsEyeXHost _eyeXHost = new FormsEyeXHost();
+        private FormsEyeXHost _eyeXHost = new FormsEyeXHost();
 
         /// <summary>
         /// Gets the singleton EyeX host instance.
         /// </summary>
-        public static FormsEyeXHost EyeXHost
+        public FormsEyeXHost EyeXHost
         {
             get { return _eyeXHost; }
         }
@@ -23,7 +23,8 @@ namespace CefSharp.MinimalExample.WinForms
         [STAThread]
         public static void Main()
         {
-            _eyeXHost.Start();
+            Program p = new Program();
+            p._eyeXHost.Start();
             //For Windows 7 and above, best to include relevant app.manifest entries as well
             Cef.EnableHighDPISupport();
 
@@ -32,7 +33,7 @@ namespace CefSharp.MinimalExample.WinForms
 
             var browser = new BrowserForm();
             Application.Run(browser);
-            _eyeXHost.Dispose();
+            p._eyeXHost.Dispose();
         }
     }
 }
