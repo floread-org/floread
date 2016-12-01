@@ -4,14 +4,26 @@
 
 using System;
 using System.Windows.Forms;
+using EyeXFramework.Forms;
 
 namespace CefSharp.MinimalExample.WinForms
 {
     public class Program
     {
+        private static FormsEyeXHost _eyeXHost = new FormsEyeXHost();
+
+        /// <summary>
+        /// Gets the singleton EyeX host instance.
+        /// </summary>
+        public static FormsEyeXHost EyeXHost
+        {
+            get { return _eyeXHost; }
+        }
+
         [STAThread]
         public static void Main()
         {
+            _eyeXHost.Start();
             //For Windows 7 and above, best to include relevant app.manifest entries as well
             Cef.EnableHighDPISupport();
 
@@ -20,6 +32,7 @@ namespace CefSharp.MinimalExample.WinForms
 
             var browser = new BrowserForm();
             Application.Run(browser);
+            _eyeXHost.Dispose();
         }
     }
 }
