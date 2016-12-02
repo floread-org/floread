@@ -1,10 +1,10 @@
-﻿<html>
+<html>
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
   <link href="https://fonts.googleapis.com/css?family=Raleway:200,300,400" rel="stylesheet">
   <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://cdn.jsdelivr.net/lining.js/0.3.2/lining.min.js"></script>
+  <script src="http://cdn.jsdelivr.net/lining.js/0.3.2/lining.min.js"></script>
 
   <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
   <link href="./css/entry.css" rel="stylesheet">
@@ -28,6 +28,13 @@
     </div>
   </center>
   <script type = "text/javascript">
+    $( "#content" ).mousemove(function( event ) {
+      //msg += event.pageX + ", " + event.pageY;
+      elementMouseIsOver = document.elementFromPoint(event.clientX, event.clientY);
+      if(!$(elementMouseIsOver).next().hasClass('focus'))
+        $('.line').removeClass('focus');
+      $(elementMouseIsOver).next().addClass('focus');
+    });
     $('#startbtn').click(function(){
       $('#intro').fadeOut(500, function(){
         $.ajax({
