@@ -25,6 +25,7 @@ namespace CefSharp.MinimalExample.WinForms
         int accumulator = 0;
         static int N = 10; // number of samples
         GazePointDataStream lightlyFilteredGazeDataStream;
+        int timer = 0;
 
         public BrowserForm(Program p)
         {
@@ -68,9 +69,10 @@ namespace CefSharp.MinimalExample.WinForms
                 //panel.BorderStyle = (e.HasGaze) ? BorderStyle.FixedSingle : BorderStyle.None;
                 //Console.WriteLine(e.X);
                 //Console.WriteLine(e.Y);
+                
                 if (ea.HasGaze)
                 {
-                    this.lightlyFilteredGazeDataStream.Next += (s, e) => doSomething(e.X, e.Y, e.Timestamp);
+                    this.lightlyFilteredGazeDataStream.Next += (s, e) => doSomething(e.X, e.Y, e.Timestamp);  
                 }
             }
         }
@@ -79,16 +81,22 @@ namespace CefSharp.MinimalExample.WinForms
         {
             // Set the Current cursor, move the cursor's Position,
             // and set its clipping rectangle to the form. 
-
+           
             this.Cursor = new Cursor(Cursor.Current.Handle);
             Cursor.Position = new Point((int)x, (int)y);
             Cursor.Clip = new Rectangle(this.Location, this.Size);
+           
         }
 
         private void doSomething(double X, double Y, double timestamp)
         {
-            Console.WriteLine("Gaze point at ({0:0.0}, {1:0.0}) @{2:0}", X, Y, timestamp);
-            MoveCursor(X, Y);
+            timer++;
+            if (timer == 1000)
+            {
+                //Console.WriteLine("Gaze point at ({0:0.0}, {1:0.0}) @{2:0}", X, Y, timestamp);
+                MoveCursor(X, Y);
+                timer = 0;
+            }
         }
 
         private void port_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
