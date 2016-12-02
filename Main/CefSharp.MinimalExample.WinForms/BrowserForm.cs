@@ -11,6 +11,7 @@ using EyeXFramework.Forms;
 using Tobii.EyeX.Framework;
 
 using System.IO.Ports;
+using System.Drawing;
 
 namespace CefSharp.MinimalExample.WinForms
 {
@@ -74,10 +75,22 @@ namespace CefSharp.MinimalExample.WinForms
             }
         }
 
+        private void MoveCursor(double x,double y)
+        {
+            // Set the Current cursor, move the cursor's Position,
+            // and set its clipping rectangle to the form. 
+
+            this.Cursor = new Cursor(Cursor.Current.Handle);
+            Cursor.Position = new Point((int)x, (int)y);
+            Cursor.Clip = new Rectangle(this.Location, this.Size);
+        }
+
         private void doSomething(double X, double Y, double timestamp)
         {
             Console.WriteLine("Gaze point at ({0:0.0}, {1:0.0}) @{2:0}", X, Y, timestamp);
+            MoveCursor(X, Y);
         }
+
         private void port_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
             string line = port.ReadLine();
