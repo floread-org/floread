@@ -19,6 +19,9 @@ namespace CefSharp.MinimalExample.WinForms
         // serial port source modified from:
         // http://forum.arduino.cc/index.php?topic=40336.0
         SerialPort port;
+        int counter = 0;
+        int accumulator = 0;
+        static int N = 10; // number of samples
 
         
         public BrowserForm()
@@ -64,34 +67,49 @@ namespace CefSharp.MinimalExample.WinForms
         {
             // TODO: modify the CSS of the web-app
             int photoValue = int.Parse(line);
+
+            if (counter < N - 1)
+            {
+                accumulator += photoValue;
+                counter++;
+                return;
+            }
+            else {
+                photoValue = (accumulator + photoValue) / N;
+                counter = 0;
+                accumulator = 0;
+            }
+
             Console.WriteLine(photoValue);
 
             string color = "black", background = "white";
 
+            // room is brightest
             if (photoValue < 150)
-            {
-                color = "yellow";
-                background = "purple";
-            }
-            else if (photoValue < 325)
-            {
-                color = "green";
-                background = "orange";
-            }
-            else if (photoValue < 440)
-            {
-                color = "blue";
-                background = "black";
-            }
-            else if (photoValue < 570)
-            {
-                color = "brown";
-                background = "gray";
-            }
-            else
             {
                 color = "black";
                 background = "white";
+            }
+            else if (photoValue < 325)
+            {
+                color = "#073642";
+                background = "#eee8d5";
+
+            }
+            else if (photoValue < 440)
+            {
+                color = "#fdf6e3";
+                background = "#586e75";
+            }
+            else if (photoValue < 570)
+            {
+                color = "#eee8d5";
+                background = "#073642";
+            }
+            else  // room is darkest
+            {
+                color = "white";
+                background = "black";
             }
             // https://github.com/cefsharp/CefSharp/wiki/Frequently-asked-questions#CallJS
             // var script = string.Format("setColors({0});'", photoValue);
