@@ -59,6 +59,7 @@ namespace CefSharp.MinimalExample.WinForms
             DisplayOutput(version);
             behaviorMap1.Add(browser, new GazeAwareBehavior(OnGaze));
             this.lightlyFilteredGazeDataStream = p.EyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
+            this.Cursor = new Cursor(Cursor.Current.Handle);
         }
 
         private void OnGaze(object sender, GazeAwareEventArgs ea)
@@ -66,26 +67,11 @@ namespace CefSharp.MinimalExample.WinForms
             var browsr = sender as ChromiumWebBrowser;
             if (browsr != null)
             {
-                //panel.BorderStyle = (e.HasGaze) ? BorderStyle.FixedSingle : BorderStyle.None;
-                //Console.WriteLine(e.X);
-                //Console.WriteLine(e.Y);
-                
                 if (ea.HasGaze)
                 {
                     this.lightlyFilteredGazeDataStream.Next += (s, e) => doSomething(e.X, e.Y, e.Timestamp);  
                 }
             }
-        }
-
-        private void MoveCursor(double x,double y)
-        {
-            // Set the Current cursor, move the cursor's Position,
-            // and set its clipping rectangle to the form. 
-           
-            this.Cursor = new Cursor(Cursor.Current.Handle);
-            Cursor.Position = new Point((int)x, (int)y);
-            Cursor.Clip = new Rectangle(this.Location, this.Size);
-           
         }
 
         private void doSomething(double X, double Y, double timestamp)
@@ -94,7 +80,7 @@ namespace CefSharp.MinimalExample.WinForms
             if (timer == 1000)
             {
                 //Console.WriteLine("Gaze point at ({0:0.0}, {1:0.0}) @{2:0}", X, Y, timestamp);
-                MoveCursor(X, Y);
+                Cursor.Position = new Point((int)X, (int)Y);
                 timer = 0;
             }
         }
