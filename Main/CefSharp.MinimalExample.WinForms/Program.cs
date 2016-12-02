@@ -24,16 +24,21 @@ namespace CefSharp.MinimalExample.WinForms
         public static void Main()
         {
             Program p = new Program();
-            p._eyeXHost.Start();
+            
             //For Windows 7 and above, best to include relevant app.manifest entries as well
             Cef.EnableHighDPISupport();
 
             //Perform dependency check to make sure all relevant resources are in our output directory.
             Cef.Initialize(new CefSettings(), performDependencyCheck: true, browserProcessHandler: null);
 
-            var browser = new BrowserForm();
-            Application.Run(browser);
-            p._eyeXHost.Dispose();
+            var browser = new BrowserForm(p);
+            p._eyeXHost.Start();
+            try { Application.Run(browser); }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            //p._eyeXHost.Dispose();
         }
     }
 }

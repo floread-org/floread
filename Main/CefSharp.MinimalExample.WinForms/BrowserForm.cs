@@ -8,6 +8,7 @@ using CefSharp.MinimalExample.WinForms.Controls;
 using CefSharp.WinForms;
 using EyeXFramework;
 using EyeXFramework.Forms;
+using Tobii.EyeX.Framework;
 
 using System.IO.Ports;
 
@@ -19,14 +20,14 @@ namespace CefSharp.MinimalExample.WinForms
         // serial port source modified from:
         // http://forum.arduino.cc/index.php?topic=40336.0
         SerialPort port;
+        GazePointDataStream lightlyFilteredGazeDataStream;
 
-        
-        public BrowserForm()
+        public BrowserForm(Program p)
         {
             InitializeComponent();
             port = new SerialPort();
-            Program p = new Program();
             p.EyeXHost.Connect(behaviorMap1);
+            
             port.PortName = "COM3";
             port.BaudRate = 9600;
             port.DtrEnable = true;
@@ -51,8 +52,29 @@ namespace CefSharp.MinimalExample.WinForms
             var bitness = Environment.Is64BitProcess ? "x64" : "x86";
             var version = String.Format("Chromium: {0}, CEF: {1}, CefSharp: {2}, Environment: {3}", Cef.ChromiumVersion, Cef.CefVersion, Cef.CefSharpVersion, bitness);
             DisplayOutput(version);
+            behaviorMap1.Add(browser, new GazeAwareBehavior(OnGaze));
+            this.lightlyFilteredGazeDataStream = p.EyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
         }
 
+        private void OnGaze(object sender, GazeAwareEventArgs ea)
+        {
+            var browsr = sender as ChromiumWebBrowser;
+            if (browsr != null)
+            {
+                //panel.BorderStyle = (e.HasGaze) ? BorderStyle.FixedSingle : BorderStyle.None;
+                //Console.WriteLine(e.X);
+                //Console.WriteLine(e.Y);
+                if (ea.HasGaze)
+                {
+                    this.lightlyFilteredGazeDataStream.Next += (s, e) => doSomething(e.X, e.Y, e.Timestamp);
+                }
+            }
+        }
+
+        private void doSomething(double X, double Y, double timestamp)
+        {
+            Console.WriteLine("Gaze point at ({0:0.0}, {1:0.0}) @{2:0}", X, Y, timestamp);
+        }
         private void port_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
             string line = port.ReadLine();
