@@ -81,6 +81,7 @@ namespace CefSharp.MinimalExample.WinForms
             {
                 //Console.WriteLine("Gaze point at ({0:0.0}, {1:0.0}) @{2:0}", X, Y, timestamp);
                 Cursor.Position = new Point((int)X, (int)Y);
+                Cursor.Hide();
                 timer = 0;
             }
         }
