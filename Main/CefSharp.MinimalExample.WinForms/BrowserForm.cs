@@ -26,6 +26,7 @@ namespace CefSharp.MinimalExample.WinForms
         static int N = 10; // number of samples
         GazePointDataStream lightlyFilteredGazeDataStream;
         int timer = 0;
+        string initURL = "http://jeremyleu.com/floread/";
 
         public BrowserForm(Program p)
         {
@@ -42,7 +43,8 @@ namespace CefSharp.MinimalExample.WinForms
             Text = "FloRead";
             WindowState = FormWindowState.Maximized;
             // http://www.nytimes.com/2011/03/27/business/27novel.html
-            browser = new ChromiumWebBrowser("file:///C:/Users/Abhii/Source/Repos/floread/floreadWeb/index.html")
+            // browser = new ChromiumWebBrowser("file:///C:/Users/Abhii/Source/Repos/floread/floreadWeb/index.html")
+            browser = new ChromiumWebBrowser(initURL)
             {
                 Dock = DockStyle.Fill,
             };
@@ -81,7 +83,7 @@ namespace CefSharp.MinimalExample.WinForms
             {
                 //Console.WriteLine("Gaze point at ({0:0.0}, {1:0.0}) @{2:0}", X, Y, timestamp);
                 Cursor.Position = new Point((int)X, (int)Y);
-                Cursor.Hide();
+                // Cursor.Hide();
                 timer = 0;
             }
         }
