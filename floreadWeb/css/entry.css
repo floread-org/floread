@@ -107,6 +107,9 @@ button, .btn{
 	-webkit-filter: blur(1px);
 	opacity: 0.7; transition: all 0.2s ease 0s;
 	-webkit-transition: all 0.2s ease 0s;
+	-ms-transform: none; /* IE 9 */
+  -webkit-transform: none; /* Safari */
+  transform: none;
 }
 
 #container .focus, #container .line:hover {
