@@ -12,6 +12,7 @@ using Tobii.EyeX.Framework;
 
 using System.IO.Ports;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace CefSharp.MinimalExample.WinForms
 {
@@ -37,7 +38,7 @@ namespace CefSharp.MinimalExample.WinForms
             port.PortName = "COM3";
             port.BaudRate = 9600;
             port.DtrEnable = true;
-            port.Open();
+            // port.Open();
             port.DataReceived += port_DataReceived;
 
             Text = "FloRead";
@@ -79,11 +80,35 @@ namespace CefSharp.MinimalExample.WinForms
         private void doSomething(double X, double Y, double timestamp)
         {
             timer++;
-            if (timer == 1000)
+            if (timer == 500)
             {
-                //Console.WriteLine("Gaze point at ({0:0.0}, {1:0.0}) @{2:0}", X, Y, timestamp);
+                // Focusing
                 Cursor.Position = new Point((int)X, (int)Y);
-                // Cursor.Hide();
+                if (Y > 100 && Y < 1000)
+                {
+                    Cursor.Hide();
+                }
+
+                // Scrolling
+                Task<JavascriptResponse> scrollTask = null;
+                int direction = 0;
+                int up = -200;
+                int down = 200;
+
+                if (Y < 300) {
+                    direction = up;
+                }
+                else if (Y > 900)
+                {
+                    direction = down;
+                }
+
+                scrollTask = browser.EvaluateScriptAsync(String.Format("window.scrollBy({0}, {1});", 0, direction));
+                if (scrollTask != null && direction != 0)
+                {
+                    scrollTask.ContinueWith(t => { }).Wait();
+                }
+
                 timer = 0;
             }
         }
