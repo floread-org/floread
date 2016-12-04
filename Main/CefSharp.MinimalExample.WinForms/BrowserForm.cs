@@ -38,7 +38,7 @@ namespace CefSharp.MinimalExample.WinForms
             port.PortName = "COM3";
             port.BaudRate = 9600;
             port.DtrEnable = true;
-            // port.Open();
+            port.Open();
             port.DataReceived += port_DataReceived;
 
             Text = "FloRead";
