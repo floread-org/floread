@@ -13,6 +13,7 @@
   <title>FLOREAD DEMO</title>
 </head>
 <body>
+  <span href = "#" class = "backarrow glyphicon glyphicon-chevron-left"></span>
   <center>
     <div id = "flex-container">
       <div id = "container">
@@ -32,10 +33,11 @@
       //msg += event.pageX + ", " + event.pageY;
       elementMouseIsOver = document.elementFromPoint(event.clientX, event.clientY);
       if(!$(elementMouseIsOver).next().hasClass('focus'))
-        $('.line').removeClass('focus');
+        $('.focus').removeClass('focus');
       $(elementMouseIsOver).next().addClass('focus');
     });
     $('#startbtn').click(function(){
+
       $('#intro').fadeOut(500, function(){
         $.ajax({
           type: "GET",
@@ -44,15 +46,25 @@
           headers: {'x-api-key': 'gGcTfQmN8iBijl9V7UQuolHpJbxeaFMHeDjIGJuJ'},
           complete: function( data ) {
             document.getElementById('content').innerHTML = '<h1>' + data.responseJSON.title + '</h1>' + data.responseJSON.content;
-            console.log(data);
+
             $('#content').fadeIn(500, function(){
               var poemLining = lining(document.getElementById('content'), {
                 'autoResize': true
               });
             });
+
           }
         });
+        $('.backarrow').fadeIn(500);
       });
+    });
+
+    $('.backarrow').click(function(){
+      $('#content').fadeOut(500, function(){
+        document.getElementById('content').innerHTML = '';
+        $('.backarrow').fadeOut(500);
+        $('#intro').fadeIn(500);
+      })
     });
   </script>
 

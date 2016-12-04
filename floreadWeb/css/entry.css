@@ -100,12 +100,17 @@ button, .btn{
 	font-size: 14pt;
 	font-family: Raleway;
 	font-weight: 300;
+	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
 }
 
 #container .line {
 	filter:blur(1px);
 	-webkit-filter: blur(1px);
-	opacity: 0.7; transition: all 0.2s ease 0s;
+	opacity: 0.7;
+	transition: all 0.2s ease 0s;
 	-webkit-transition: all 0.2s ease 0s;
 	-ms-transform: none; /* IE 9 */
   -webkit-transform: none; /* Safari */
@@ -119,5 +124,23 @@ button, .btn{
 	-ms-transform: scale(1.1, 1.1); /* IE 9 */
   -webkit-transform: scale(1.1, 1.1); /* Safari */
   transform: scale(1.1, 1.1);
+
+}
+
+.backarrow {
+	font-size: 2em;
+	display: none;
+	position: fixed;
+	left: 20px;
+	top: 20px;
+	transition: all 0.2s ease 0s;
+	-webkit-transition: all 0.2s ease 0s;
+}
+
+.backarrow:hover {
+	cursor: pointer;
+	-ms-transform: scale(1.25, 1.25); /* IE 9 */
+  -webkit-transform: scale(1.25, 1.25); /* Safari */
+  transform: scale(1.25, 1.25);
 
 }
