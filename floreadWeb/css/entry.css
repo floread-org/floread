@@ -106,6 +106,14 @@ button, .btn{
 	-webkit-backface-visibility: hidden;
 }
 
+h1 {
+	line-height: 1.5em;
+}
+
+img {
+	margin-bottom: 5%;
+}
+
 #container .line {
 	filter:blur(1px);
 	-webkit-filter: blur(1px);
@@ -135,6 +143,11 @@ button, .btn{
 	top: 20px;
 	transition: all 0.2s ease 0s;
 	-webkit-transition: all 0.2s ease 0s;
+}
+
+.caption {
+	width: auto;
+	display: inline-block
 }
 
 .backarrow:hover {
