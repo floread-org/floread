@@ -97,7 +97,7 @@ button, .btn{
 #content {
 	text-align: left;
 	line-height: 2.5em;
-	font-size: 12pt;
+	font-size: 14pt;
 	font-family: Raleway;
 	font-weight: 300;
 }
@@ -113,8 +113,8 @@ button, .btn{
 	filter:none;
 	-webkit-filter: none;
 	opacity: 1;
-	-ms-transform: scale(1.15, 1.15); /* IE 9 */
-  -webkit-transform: scale(1.15, 1.15); /* Safari */
-  transform: scale(1.15, 1.15);
+	-ms-transform: scale(1.1, 1.1); /* IE 9 */
+  -webkit-transform: scale(1.1, 1.1); /* Safari */
+  transform: scale(1.1, 1.1);
 
 }
