@@ -103,7 +103,7 @@ namespace CefSharp.MinimalExample.WinForms
                     direction = down;
                 }
 
-                scrollTask = browser.EvaluateScriptAsync(String.Format("window.scrollBy({0}, {1});", 0, direction));
+                scrollTask = browser.EvaluateScriptAsync(String.Format("window.scrollBy({0}, {1}, 'smooth');", 0, direction));
                 if (scrollTask != null && direction != 0)
                 {
                     scrollTask.ContinueWith(t => { }).Wait();
